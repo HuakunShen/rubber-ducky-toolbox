@@ -29,7 +29,7 @@ if __name__ == '__main__':
         filepath = f"{row['root']}/{row['filename']}"
         download(row['url'], download_filepath)
         if not os.path.exists(filepath):
-            print("file doesn't exist, I will download the files")
+            print(f"file {filepath} doesn't exist, I will download the files")
             shutil.move(download_filepath, filepath)
             continue
         same_md5, md5sum1, md5sum2 = compare_md5(download_filepath, filepath)
