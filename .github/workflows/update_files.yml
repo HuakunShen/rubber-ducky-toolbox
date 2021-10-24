@@ -3,11 +3,11 @@ name: Update files
 on:
   push:
     branches:
-      - test
+      - mastee
   schedule:
     - cron: '0 0 * * *'
 jobs:
-  build-linux:
+  update-files:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
