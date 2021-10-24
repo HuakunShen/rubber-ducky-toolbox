@@ -1,0 +1,37 @@
+name: Update files
+
+on:
+  push:
+    branches:
+      - test
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Add conda to system path
+        run: |
+          # $CONDA is an environment variable pointing to the root of the miniconda directory
+          echo $CONDA/bin >> $GITHUB_PATH
+      - name: Install dependencies
+        run: |
+          pip install pandas
+      - name: Run update scripts
+        run: |
+          make update
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto Update out dated files
+          file_pattern: .
+          commit_user_name: Huakun Shen
+          commit_user_email: huakun.shen@huakunshen.com
