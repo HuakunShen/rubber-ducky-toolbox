@@ -3,7 +3,7 @@ name: Update files
 on:
   push:
     branches:
-      - mastee
+      - master
   schedule:
     - cron: '0 0 * * *'
 jobs:
