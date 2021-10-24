@@ -1,0 +1,4 @@
+id,root,filename,url
+1,pico-ducky,flash_nuke.uf2,https://cdn-learn.adafruit.com/assets/assets/000/099/419/original/flash_nuke.uf2?1613329170
+2,pico-ducky,adafruit-circuitpython-raspberry_pi_pico-en_GB-7.0.0.uf2,https://downloads.circuitpython.org/bin/raspberry_pi_pico/en_GB/adafruit-circuitpython-raspberry_pi_pico-en_GB-7.0.0.uf2
+3,pico-ducky,code.py,https://raw.githubusercontent.com/dbisu/pico-ducky/main/duckyinpython.py

@@ -1,0 +1,6 @@
+[submodule "pico-ducky/pico-ducky"]
+	path = pico-ducky/pico-ducky
+	url = https://github.com/dbisu/pico-ducky.git
+[submodule "pico-ducky/Adafruit_CircuitPython_Bundle"]
+	path = pico-ducky/Adafruit_CircuitPython_Bundle
+	url = https://github.com/adafruit/Adafruit_CircuitPython_Bundle
