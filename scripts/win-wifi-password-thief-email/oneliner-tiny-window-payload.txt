@@ -6,7 +6,7 @@ STRING powershell
 ENTER
 DELAY 500
 
-REM *** Hide PowerShell ***
+REM Hide PowerShell
 STRING [console]::WindowHeight=1;
 ENTER
 STRING [console]::WindowWidth=1;
