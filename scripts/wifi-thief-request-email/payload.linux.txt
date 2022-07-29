@@ -1,4 +1,4 @@
-REM ctrl alt t has to be the shortcut for opening terminal, change it if it doesn't work for you
+REM ALT + F2 should open run command window, gnome-terminal has to be the shortcut for opening terminal, change it if it doesn't work for you.
 
 DELAY 5000
 
